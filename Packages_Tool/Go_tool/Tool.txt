@@ -1,0 +1,65 @@
+Its command-line interface uses the ‘‘Swiss army knife’’ style, with over a dozen subcommands, some of which we have already 
+seen, like get, run, build, and fmt. You can run
+go help to see the index of its bui lt-in documentation, but for reference, we’ve listed the most
+commonly used commands below:
+$ go
+...
+build compile packages and dependencies
+clean remove object files
+doc show documentation for package or symbol
+env print Go environment information
+fmt run gofmt on package sources
+get download and install packages and dependencies
+install compile and install packages and dependencies
+list list packages
+run compile and run Go program
+test test packages
+version print Go version
+vet run go tool vet on packages
+Use "go help [command]" for more information about a command.
+
+The go env command prints the effective values of the environment variables relevant to the
+toolchain, including the default values for the missing ones. GOOS specifies the target operating system 
+(for example, android, linux, darwin, or windows) and GOARCH specifies the target
+processor architecture, such as amd64, 386, or arm. Although GOPATH is the only variable you
+must set, the others occasionally appear in our explanations.
+
+Building Packages
+
+The go build command compiles each argument package. If the package is a library, the
+result is discarded; this merely checks that the package is free of compile errors. If the package
+is named main, go build invokes the linker to create an executable in the current directory;
+the name of the executable is taken from the last segment of the package’s import path.
+
+Since compiled packages vary by platform and architecture, go install saves them beneath a
+subdirectory whose name incorporates the values of the GOOS and GOARCH environment variables. 
+For example, on a Mac the golang.org/x/net/html package is compiled and installed
+in the file golang.org/x/net/html.a under $GOPATH/pkg/darwin_amd64.
+It is straightforward to cross-compile a Go program, that is, to build an executable intended for
+a different operating system or CPU. Just set the GOOS or GOARCH variables during the build.
+The cross program prints the operating system and architecture for which it was built:
+
+gopl.io/ch10/cross
+func main() {
+    fmt.Println(runtime.GOOS, runtime.GOARCH)
+}
+
+The following commands produce 64-bit and 32-bit executables respectively:
+$ go build gopl.io/ch10/cross
+$ ./cross
+darwin amd64
+$ GOARCH=386 go build gopl.io/ch10/cross
+$ ./cross
+darwin 386
+
+Some packages may need to compile different versions of the code for certain platforms or
+processors, to deal with low-level portability issues or to provide optimized versions of
+important routines, for instance. If a file name includes an operating system or processor
+architecture name like net_linux.go or asm_amd64.s, then the go tool will compile the file
+only when building for that target. Special comments called build tags give more fine-grained
+control . For example, if a file contains this comment:
+// +build linux darwin
+before the package declaration (and its doc comment), go build will compile it only when
+building for Linux or Mac OS X, and this comment says never to compi le the file:
+// +build ignore
+

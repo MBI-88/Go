@@ -1,0 +1,19 @@
+A Go source file may contain zero or more import declarations immediately after the package
+declaration and before the first non-import declaration. Each import declaration may specify
+the import path of a single package, or multiple packages in a parenthesized list. The two
+forms below are equivalent but the second form is more common.
+
+import "fmt"
+import "os"
+import (
+"fmt"
+"os"
+)
+
+If we need to import two packages whose names are the same, like math/rand and
+crypto/rand, into a third package, the import declaration must specify an alternative name
+for at least one of them to avoid a conflict. This is called a renaming import.
+import (
+    "crypto/rand"
+    mrand "math/rand" // alternative name mrand avoids conflict
+)

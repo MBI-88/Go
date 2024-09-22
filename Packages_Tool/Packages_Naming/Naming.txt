@@ -1,0 +1,12 @@
+Avoid package names that already have other connotations. For example, we originally used
+the name temp for the temperature conversion package in Section 2.5, but that didn’t last long.
+It was a terrible idea because ‘‘temp’’ is an almost universal synonym for ‘‘temp orary.’’ We went
+through a brief period with the name temperature, but that was too long and didn’t say what
+the package did. In the end, it became tempconv, which is shorter and parallel with strconv.
+Now let’s turn to the naming of package members. Since each reference to a member of
+another package uses a qualified identifier such as fmt.Println, the burden of describing the
+package member is borne equally by the package name and the member name. We need not
+mention the concept of for matting in Println because the package name fmt does that
+already. When designing a package, con sider how the two parts of a qualified identifier work
+together, not the member name alone. Here are some characteristic examples:
+bytes.Equal flag.Int http.Get json.Marshal

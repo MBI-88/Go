@@ -1,0 +1,33 @@
+The lifetime of a variable is the interval of time during which it exists as the program executes.
+The lifetime of a package-level variable is the entire execution of the program. By contrast,
+local variables have dynamic lifetimes: a new instance is created each time the declaration
+statement is executed, and the variable lives on until it becomes unreachable, at which point its
+storage may be recycled. Function parameters and results are local variables too; the y are created each time their enclosing function is 
+called.
+
+for t := 0.0; t < cycles*2*math.Pi; t += res {
+x := math.Sin(t)
+y := math.Sin(t*freq + phase)
+img.SetColorIndex(size+int(x*size+0.5), size+int(y*size+0.5),
+blackIndex)
+
+the variable t is created each time the for loop begins, and new variables x and y are created
+on each iteration of the loop.
+
+A compiler may choose to allocate local variables on the heap or on the stack but, perhaps surprisingly, this choice is not determined 
+by whether var or new was used to declare the variable.
+
+var global *int
+func f() {             func g() {
+    var x int               y := new(int)
+    x = 1                   *y = 1
+    global = &x
+}                     }
+
+Here , x must be heap-allocated because it is still reachable from the variable global after f
+has returned, despite being declared as a local variable; we say x escapes from f. Conversely,
+when g returns, the variable *y becomes unreachable and can be recycled. Since *y does not
+escape from g, it’s safe for the compiler to allocate *y on the stack, even though it was allocated with new. 
+In any case, the notion of escaping is not something that you need to worry
+about in order to write correct code, though it’s good to keep in mind during performance
+optimization, since each var iable that escapes requires an extra memory allocation.

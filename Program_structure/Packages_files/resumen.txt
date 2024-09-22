@@ -1,0 +1,9 @@
+Each package serves as a separate name space for its declarations. Within the image package,
+for example, the identifier Decode refers to a different function than does the same identifier
+in the unicode/utf16 package. To refer to a function from outside its package, we must
+qualify the identifier to make explicit whether we mean image.Decode or utf16.Decode.
+
+Packages also let us hide information by controlling which names are visible outside the package, or expor ted. 
+In Go, a simple rule governs which identifiers are exported and which are
+not: exported identifiers start with an upp er-case letter.
+
