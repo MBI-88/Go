@@ -1,0 +1,14 @@
+The compress/... subtree of the standard library provides compressors and decompressors
+for popular compression algorithms, including LZW (used by the Unix compress command)
+and DEFLATE (used by the GNU gzip command). The APIs of these packages vary slightly
+in details, but they all provide a wrapper for an io.Writer that compresses the data written to
+it, and a wrapper for an io.Reader that decompresses the data read from it. For example:
+
+package gzip // compress/gzip
+func NewWriter(w io.Writer) io.WriteCloser
+func NewReader(r io.Reader) (io.ReadCloser, error)
+
+
+
+
+

@@ -1,0 +1,25 @@
+Go has only one mechanism to control the visibility of names: capitalized identifiers are
+exported from the package in which they are defined, and uncapitalized names are not. The
+same mechanism that limits access to members of a package also limits access to the fields of a
+struct or the methods of a type. As a consequence, to encapsulate an object, we must make it a
+struct.
+
+Another consequence of this name-based mechanism is that the unit of encapsulation is the
+package, not the type as in many otherlanguages. The fields of a struct type are visible to all
+code within the same package. Whether the code appears in a function or a method makes no
+difference.
+
+Encapsulation provides three benefits. First, because clients cannot directly modify the
+object’s variables, one need inspect fewer statements to understand the possible values of those
+variables.
+
+Second, hiding implementation details prevents clients from depending on things that might
+change , which gives the designer greater freedom to evolve the implementation without breaking 
+API compatibility.
+
+The third benefit of encapsulation, and in many cases the most important, is that it prevents
+clients from setting an obje ct’s variables arbitrarily. Because the object’s variables can be set
+only by functions in the same package, the author of that package can ensure that all those
+functions maintain the object’s internal invariants. For example, the Counter type below permits clients 
+to increment the counter or to reset it to zero, but not to set it to som e arbit rar y
+value.
