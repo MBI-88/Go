@@ -1,0 +1,26 @@
+By its nature, testing is never complete. As the influential computer scientist Edsger Dijkstra
+put it, ‘‘Testing shows the presence, not the absence of bugs.’’ No quantity of tests can ever
+prove a package free of bugs. At best, they increase our confidence that the package works
+well in a wide range of important scenarios.
+
+Statement coverage is the simplest and most widely used of these heuristics. The statement
+coverage of a test suite is the fraction of source statements that are executed at least once 
+during the test. In this section, we’ll use Go’s cover tool, which is integrated into go test, to
+measure statement coverage and help identify obvious gaps in the tests.
+	
+This command displays the usage message of the coverage tool:
+$ go tool cover
+Usage of 'go tool cover':
+Given a coverage profile produced by 'go test':
+go test -coverprofile=c.out
+Open a web browser displaying annotated source code:
+go tool cover -html=c.out
+..
+$ go test -run=Coverage -coverprofile=c.out gopl.io/ch7/eval
+ok gopl.io/ch7/eval 0.032s coverage: 68.5% of statements
+
+
+
+
+
+

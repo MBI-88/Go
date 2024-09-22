@@ -1,0 +1,51 @@
+Chapter 1 
+
+La separación en un arreglo incluye el primer elemento pero no el ultimo (Igual a Python)
+La libreria os contiene el metodo Args, que esta formado por fragmentos de un arreglo, el cual puede 
+ser accedido de la siguiente forma s[i].
+El primer argumento en os.Args[0] es el nombre del comando
+
+Formas de uso de for:
+
+The for loop is the only loop statement in Go. It has a number of for ms, one of which is
+illustrated here:
+for initialization; condition; post {
+// zero or more statements
+}
+Parent hes es are never used aro und the three components of a for lo op. The braces are
+mand atory, how ever, and the opening brace must be on the same line as the post st atement
+
+Any of these par ts may be omitt ed. If there is no initialization and no post, the semicolons may also be omitt ed:
+// a traditional "while" loop
+for condition {
+// ...
+}
+If the con dit ion is omitt ed ent ire ly in any of these for ms, for example in
+// a traditional infinite loop
+for {
+// ...
+}
+the loop is infinite, thoug h lo ops of this for m may be ter minated in som e ot her way, like a
+break or return st atement.
+
+Anot her for m of the for lo op iterates over a ra nge of values fro m a dat a type like a st ring or a
+slice.
+
+
+This version of the program uses a short var iable decl arat ion to declare and initialize s and
+sep, but we cou ld equ ally wel l have declare d the var iables sep arately. There are several ways
+to declare a str ing var iable; these are all equivalent:
+s := ""
+var s string
+var s = ""
+var s string = ""
+
+The first form, a short var iable decl arat ion, is
+the most compact, but it may be used only wit hin a function, not for package-le vel var iables.
+The second form relies on defau lt initializat ion to the zero value for str ings, which is "".
+The third for m is rarely used except when declaring multiple var iables.
+The fourth for m is explicit about the variable’s type, which is redundant when it is the same as that of the initial value but
+ne cessary in other cas es where the y are not of the same type.
+
+
+

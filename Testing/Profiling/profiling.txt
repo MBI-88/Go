@@ -1,0 +1,33 @@
+Yet we should not pass up our opportunities in that critical 3%. A good programmer
+will not be lulled into complacency by such reasoning, he will be wise to look carefully
+at the critical code; but only after that code has been identified. It is often a mistake to
+make a priori judgments about what parts of a program are really critical, since the
+universal experience of programmers who have been using measurement tools has
+been that their intuitive guesses fail.
+
+When we wish to look carefully at the speed of our programs, the best technique for identifying the critical 
+code is profiling. Profiling is an automated approach to performance measurement based on sampling a number of 
+profile events during execution, then extrapolating from
+them during a post-processing step; the resulting statistical summary is called a profile.
+
+A CPU profile identifies the functions whose execution requires the most CPU time. The currently running thread on each CPU is interrupted 
+periodic ally by the operating system every
+few milliseconds, with each interruption recording one profile event before normal execution
+resumes.
+A heap profile identifies the statements responsible for allocating the most memory. The
+profiling library samples calls to the internal memory allocation routines so that on average,
+on e profile event is recorded per 512KB of allocated memory.
+A blocking profile identifies the operations responsible for blocking goroutines the longest,
+such as system calls, channel sends and receives, and acquisitions of locks. The profiling
+library records an event every time a goroutine is blocked by one of these operations.
+Gathering a profile for code under test is as easy as enabling one of the flags below. Be careful
+when using more than one flag at a time, how ever: the machinery for gathering one kind of
+profile may skew the results of others.
+$ go test -cpuprofile=cpu.out
+$ go test -blockprofile=block.out
+$ go test -memprofile=mem.out
+
+Once we’ve gathered a profile, we need to analyze it using the pprof tool. This is a standard
+part of the Go distribution, but since it’s not an everyday tool, it’s accessed indirectly using
+go tool pprof. It has dozens of features and options, but basic use requires only two arguments, 
+the executable that produced the profile and the profile log.
