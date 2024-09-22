@@ -1,0 +1,20 @@
+Even with the greatest of care, it’s all too easy to make con currency mistakes. Fortunately, the
+Go runtime and toolchain are equipped with a sophisticated and easy-to-use dynamic analysis
+tool, the race detector.
+
+Just add the -race flag to your go build, go run, or go test command. This causes the compiler to build a modified version of your application or test with additional instrument ation
+that effectively records all accesses to shared variables that occurred during execution, along
+with the identity of the goroutine that read or wrote the variable. In addition, the modified
+program records all synchronization events, such as go statements, channel operations, and
+calls to (*sync.Mutex).Lock, (*sync.WaitGroup).Wait, and so on. (The complete set of
+synchronization events is specified by the The Go Memory Model document that accompanies
+the language specification.)
+
+The race detector reports all data races that were actually executed. How ever, it can only
+detect race conditions that occur during a run; it cannot prove that none will ever occur. For
+best results, make sure that your tests exercise your packages using concurrency.
+
+Due to extra bookkeeping , a program built with race detection needs more time and memory
+to run, but the overhe ad is tolerable even for many production jobs. 
+For infrequently occurring race conditions, letting the race detector do its job can save hours or days 
+of debugging.
