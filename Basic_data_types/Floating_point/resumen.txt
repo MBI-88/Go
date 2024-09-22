@@ -1,0 +1,18 @@
+Go provides two sizes of floating-point numbers, float32 and float64. Their arithmetic
+properties are governed by the IEEE 754 standard implemented by all modern CPUs.
+
+Values of these numeric types range from tiny to huge. The limits of floating-point values can
+be found in the math package. The constant math.MaxFloat32, the largest float32, is about
+3.4e38, and math.MaxFloat64 is about 1.8e308. The smallest positive values are near
+1.4e-45 and 4.9e-324, respectively.
+
+A float32 provides approximately six decimal digits of precision, where as a float64
+provides about 15 digits; float64 should be preferred for most purposes because float32
+computations accumulate error rapidly unless one is quite careful, and the smallest positive
+integer that cannot be exactly represented as a float32 is not large.
+
+Digits may be omitted before the decimal point (.707) or after it (1.). Very small or very
+large numbers are better written in scientific notation, with the letter e or E preceding the decimal 
+exponent:
+const Avogadro = 6.02214129e23
+const Planck = 6.62606957e-34
